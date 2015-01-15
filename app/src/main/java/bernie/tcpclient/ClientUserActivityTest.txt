@@ -1,0 +1,25 @@
+public void send(){
+	String msg = findViewById(R.id.textInput).getText();
+	String returnMsg = client.send(msg);
+	findViewById(R.id.textOutput).setText(returnMsg);
+}
+
+public void init(){
+	String addr = (String)(TextView)(findViewById(R.id.addrInput)).getText();
+	int port;
+	try{
+		port = Integer.parseInt((String)(TextView)(findViewById(R.id.portInput)).getText());
+	}
+	catch(Exception e){
+		(TextView)(findViewById(R.id.textOutput)).setText("Invalid port");
+		return;
+	}
+	int ret = client.init(addr,port);
+	switch(ret){
+	case 0:
+		(TextView)(findViewById(R.id.textOutput)).setText("Connected to "+addr+":"+port);
+	case 1:
+		(TextView)(findViewById(R.id.textOutput)).setText("Connection failed!";
+		break;
+	}
+}

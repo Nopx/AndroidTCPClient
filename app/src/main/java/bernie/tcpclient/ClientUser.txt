@@ -1,0 +1,15 @@
+public class ClientUser{
+
+	public static void main(String[] args){
+		Client client = new Client();
+		try{
+			client.init(args[0],Integer.parseInt(args[1]));
+		}
+		catch(Exception e){
+			System.out.println("Init failed");
+			return;
+		}
+		System.out.println(client.send("Hallo"));
+		client.close();
+	}
+}

@@ -1,0 +1,181 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+    android:layout_height="match_parent" android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    android:paddingBottom="@dimen/activity_vertical_margin" tools:context=".TCPSenderActivity">
+
+    <EditText android:text="" android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/inputText"
+        android:layout_alignBottom="@+id/sendButton"
+        android:layout_toLeftOf="@+id/sendButton"
+        android:layout_alignTop="@+id/sendButton"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:textSize="50px"/>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/ok"
+        android:id="@+id/sendButton"
+        android:onClick="send"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/fillString"
+        android:id="@+id/textOutput"
+        android:textSize="50px"
+        android:layout_below="@+id/inputText"
+        android:layout_toRightOf="@+id/ipLbl"
+        android:layout_toEndOf="@+id/ipLbl" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/init"
+        android:id="@+id/initBtn"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:onClick="init"/>
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/addrInput"
+        android:layout_alignBottom="@+id/initBtn"
+        android:layout_toLeftOf="@+id/initBtn"
+        android:layout_toRightOf="@+id/ipLbl"
+        android:layout_toEndOf="@+id/ipLbl" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="@string/ip"
+        android:id="@+id/ipLbl"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignTop="@+id/addrInput" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="@string/port"
+        android:id="@+id/portLbl"
+        android:layout_alignLeft="@+id/ipLbl"
+        android:layout_alignTop="@+id/portInput"/>
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="number"
+        android:ems="10"
+        android:id="@+id/portInput"
+        android:layout_above="@+id/initBtn"
+        android:layout_toRightOf="@+id/portLbl"
+        android:layout_toEndOf="@+id/portLbl" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/num1"
+        android:id="@+id/button1"
+        android:layout_alignTop="@+id/button2"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:onClick="send"/>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/num2"
+        android:id="@+id/button2"
+        android:layout_below="@+id/textOutput"
+        android:layout_centerHorizontal="true"
+        android:onClick="send"/>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/num3"
+        android:id="@+id/button3"
+        android:layout_below="@+id/textOutput"
+        android:layout_toRightOf="@+id/inputText"
+        android:layout_toEndOf="@+id/inputText"
+        android:onClick="send"/>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/num4"
+        android:id="@+id/button4"
+        android:layout_below="@+id/button1"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:onClick="send"/>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/num5"
+        android:id="@+id/button5"
+        android:layout_below="@+id/button2"
+        android:layout_alignLeft="@+id/button2"
+        android:onClick="send"/>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/num6"
+        android:id="@+id/button6"
+        android:layout_below="@+id/button3"
+        android:layout_toRightOf="@+id/inputText"
+        android:onClick="send"/>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/num7"
+        android:id="@+id/button7"
+        android:layout_below="@+id/button4"
+        android:layout_alignLeft="@+id/button4"
+        android:onClick="send"/>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/num8"
+        android:id="@+id/button8"
+        android:layout_below="@+id/button5"
+        android:layout_alignLeft="@+id/button5"
+        android:onClick="send"/>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/num9"
+        android:id="@+id/button9"
+        android:layout_below="@+id/button6"
+        android:layout_alignLeft="@+id/button6"
+        android:onClick="send"/>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="end"
+        android:id="@+id/buttonEnd"
+        android:layout_above="@+id/portInput"
+        android:layout_alignRight="@+id/button9"
+        android:layout_alignEnd="@+id/button9"
+        android:layout_marginBottom="44dp"
+        android:onClick="send"/>
+
+</RelativeLayout>
