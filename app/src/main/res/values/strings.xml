@@ -1,14 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">TCPClient</string>
+    <string name="app_name">µ-Remote</string>
     <string name="hello_world">Hello world!</string>
-    <string name="action_settings">Settings</string>
+    <string name="change_layout">Change Layout</string>
     <string name="init">init</string>
+
     <string name="ok">OK</string>
+    <string name="cancel">Cancel</string>
+
     <string name="fillString">Output</string>
     <string name="ip">IP</string>
     <string name="port">Port</string>
+
     <string name="num1">1</string>
     <string name="num2">2</string>
     <string name="num3">3</string>
@@ -18,7 +22,22 @@
     <string name="num7">7</string>
     <string name="num8">8</string>
     <string name="num9">9</string>
+    <string name="num10">10</string>
     <string name="title_activity_settings">SettingsActivity</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="action_settings">Button Labels</string>
+
+    <string name="btnpref_summary"></string>
+    <string name="btnpref_title1">Button Label 1</string>
+    <string name="btnpref_title2">Button Label 2</string>
+    <string name="btnpref_title3">Button Label 3</string>
+    <string name="btnpref_title4">Button Label 4</string>
+    <string name="btnpref_title5">Button Label 5</string>
+    <string name="btnpref_title6">Button Label 6</string>
+    <string name="btnpref_title7">Button Label 7</string>
+    <string name="btnpref_title8">Button Label 8</string>
+    <string name="btnpref_title9">Button Label 9</string>
+    <string name="btnpref_title10">Button Label 10</string>
+
 
 </resources>

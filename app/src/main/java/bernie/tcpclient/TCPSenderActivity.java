@@ -2,21 +2,34 @@ package bernie.tcpclient;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceFragment;
+import android.preference.PreferenceManager;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import bernie.tcpclient.Preference.SettingsActivity;
+
 
 public class TCPSenderActivity extends Activity {
 
-    Client client;
+    Client client = new Client();
+    private static  final int PORT = 4;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tcpsender);
+    }
+
+    @Override
+    protected void onResume(){
+        super.onResume();
+        loadLabels();
     }
 
 
@@ -28,6 +41,8 @@ public class TCPSenderActivity extends Activity {
     }
 
     public void send(View view){
+        //#ff2b4b75 normal
+        //#ff3c5c86 gedrückt
         String msg = "";
         switch(view.getId()){
             case R.id.button1:
@@ -57,55 +72,19 @@ public class TCPSenderActivity extends Activity {
             case R.id.button9:
                 msg = ""+9;
                 break;
-            case R.id.sendButton:
-                msg = ((TextView)findViewById(R.id.inputText)).getText().toString();
-                break;
-            case R.id.buttonEnd:
-                msg = "end";
+            case R.id.button10:
+                msg = ""+10;
                 break;
         }
         String addr = ((TextView)findViewById(R.id.addrInput)).getText().toString();
-        int port;
-        try{
-            port = Integer.parseInt(((TextView)findViewById(R.id.portInput)).getText().toString());
-            if(client == null){
-                client = new Client();
-            }
-            client.safeSend(addr,port,msg);
-        }
-        catch(Exception e){
-            ((TextView)findViewById(R.id.textOutput)).setText("Invalid port");
-            return;
-        }
+        if(addr.length() >=11)
+            client.safeSend(addr,PORT,msg);
     }
 
     public void init(View view){
         String addr = ((TextView)findViewById(R.id.addrInput)).getText().toString();
-        int port;
-        try{
-            port = Integer.parseInt(((TextView)findViewById(R.id.portInput)).getText().toString());
-        }
-        catch(Exception e){
-            ((TextView)findViewById(R.id.textOutput)).setText("Invalid port");
-            return;
-        }
         client = new Client();
-        int ret = client.init(addr,port);
-        switch(ret){
-            case 0:
-                ((TextView)findViewById(R.id.textOutput)).setText("Connected to "+addr+":"+port);
-            case 1:
-                ((TextView)findViewById(R.id.textOutput)).setText("Connection failed!");
-                break;
-            case 2:
-                ((TextView)findViewById(R.id.textOutput)).setText("IO Error");
-                break;
-            case 3:
-                ((TextView)findViewById(R.id.textOutput)).setText("IO Error");
-                break;
-            default:
-                ((TextView)findViewById(R.id.textOutput)).setText("Connecting...");
-        }
+        int ret = client.init(addr,PORT);
     }
 
     @Override
@@ -117,11 +96,35 @@ public class TCPSenderActivity extends Activity {
 
         switch(id){
             case R.id.action_settings:
-                //Intent intent = new Intent(this,SettingsActivity.class);
+                Intent intent = new Intent(this,SettingsActivity.class);
+                startActivity(intent);
                 break;
 
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    private void loadLabels(){
+        SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(this);
+        String[] btnlbls = new String[10];
+        for(int i = 0; i<10; i++) {
+            btnlbls[i]=sharedPref.getString("pref_btn"+(i+1)+"lbl", "");
+        }
+        Button[] b = new Button[10];
+        b[0] = (Button)(findViewById(R.id.button1));
+        b[1] = (Button)(findViewById(R.id.button2));
+        b[2] = (Button)(findViewById(R.id.button3));
+        b[3] = (Button)(findViewById(R.id.button4));
+        b[4] = (Button)(findViewById(R.id.button5));
+        b[5] = (Button)(findViewById(R.id.button6));
+        b[6] = (Button)(findViewById(R.id.button7));
+        b[7] = (Button)(findViewById(R.id.button8));
+        b[8] = (Button)(findViewById(R.id.button9));
+        b[9] = (Button)(findViewById(R.id.button10));
+
+        for(int i = 0; i<10; i++){
+            b[i].setText(btnlbls[i]);
+        }
     }
 }
