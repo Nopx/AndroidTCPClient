@@ -1,0 +1,60 @@
+<PreferenceScreen
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <PreferenceCategory
+        android:title="Button Labels">
+
+        <EditTextPreference
+            android:key="pref_btn1lbl"
+            android:title="@string/btnpref_title1"
+            android:summary="@string/btnpref_summary"
+            android:defaultValue="@string/num1"/>
+        <EditTextPreference
+            android:key="pref_btn2lbl"
+            android:title="@string/btnpref_title2"
+            android:summary="@string/btnpref_summary"
+            android:defaultValue="@string/num2"/>
+        <EditTextPreference
+            android:key="pref_btn3lbl"
+            android:title="@string/btnpref_title3"
+            android:summary="@string/btnpref_summary"
+            android:defaultValue="@string/num3"/>
+        <EditTextPreference
+            android:key="pref_btn4lbl"
+            android:title="@string/btnpref_title4"
+            android:summary="@string/btnpref_summary"
+            android:defaultValue="@string/num4"/>
+        <EditTextPreference
+            android:key="pref_btn5lbl"
+            android:title="@string/btnpref_title5"
+            android:summary="@string/btnpref_summary"
+            android:defaultValue="@string/num5"/>
+        <EditTextPreference
+            android:key="pref_btn6lbl"
+            android:title="@string/btnpref_title6"
+            android:summary="@string/btnpref_summary"
+            android:defaultValue="@string/num6"/>
+        <EditTextPreference
+            android:key="pref_btn7lbl"
+            android:title="@string/btnpref_title7"
+            android:summary="@string/btnpref_summary"
+            android:defaultValue="@string/num7"/>
+        <EditTextPreference
+            android:key="pref_btn8lbl"
+            android:title="@string/btnpref_title8"
+            android:summary="@string/btnpref_summary"
+            android:defaultValue="@string/num8"/>
+        <EditTextPreference
+            android:key="pref_btn9lbl"
+            android:title="@string/btnpref_title9"
+            android:summary="@string/btnpref_summary"
+            android:defaultValue="@string/num9"/>
+        <EditTextPreference
+            android:key="pref_btn10lbl"
+            android:title="@string/btnpref_title10"
+            android:summary="@string/btnpref_summary"
+            android:defaultValue="@string/num10"/>
+
+    </PreferenceCategory>
+
+</PreferenceScreen>
