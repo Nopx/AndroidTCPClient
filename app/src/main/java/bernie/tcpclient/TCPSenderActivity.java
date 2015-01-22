@@ -18,7 +18,7 @@ import bernie.tcpclient.Preference.SettingsActivity;
 public class TCPSenderActivity extends Activity {
 
     Client client = new Client();
-    private static  final int PORT = 4;
+    private static  final int PORT = 80;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
