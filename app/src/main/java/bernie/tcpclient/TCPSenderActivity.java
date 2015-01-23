@@ -188,6 +188,9 @@ public class TCPSenderActivity extends Activity {
         String[] btnlbls = new String[10];
         for(int i = 0; i<10; i++) {
             btnlbls[i]=sharedPref.getString("pref_btn"+(i+1)+"lbl", "");
+            if(btnlbls[i].equals("") || btnlbls[i].equals(null)){
+                btnlbls[i] = ""+ (i+1);
+            }
         }
         Button[] b = new Button[10];
         b[0] = (Button)(findViewById(R.id.button1));
