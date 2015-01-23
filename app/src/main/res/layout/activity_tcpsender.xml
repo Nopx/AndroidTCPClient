@@ -4,26 +4,9 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     android:paddingBottom="@dimen/activity_vertical_margin" tools:context=".TCPSenderActivity"
-    android:padding="50dp"
+    android:padding="45dp"
     android:background="@drawable/background2"
     android:clickable="true">
-
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/addrInput"
-        android:layout_toRightOf="@+id/ipLbl"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentRight="true"/>
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceSmall"
-        android:text="@string/ip"
-        android:id="@+id/ipLbl"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentBottom="true" />
 
     <Button
         android:layout_width="115dp"
@@ -43,8 +26,8 @@
         android:id="@+id/button2"
         android:onClick="send"
         android:layout_alignTop="@+id/button1"
-        android:layout_alignRight="@+id/addrInput"
-        android:layout_alignEnd="@+id/addrInput"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
         android:clickable="true" />
 
     <Button
@@ -138,6 +121,18 @@
         android:layout_alignLeft="@+id/button8"
         android:layout_alignStart="@+id/button8"
         android:clickable="true" />
+
+    <Button
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/connect"
+        android:id="@+id/btnConnect"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:width="150dp"
+        android:height="15dp"
+        android:onClick="connect"/>
 
 
 </RelativeLayout>

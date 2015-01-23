@@ -1,9 +1,14 @@
 package bernie.tcpclient;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.ActivityNotFoundException;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.Uri;
 import android.os.Bundle;
+import android.preference.Preference;
 import android.preference.PreferenceFragment;
 import android.preference.PreferenceManager;
 import android.view.Menu;
@@ -13,16 +18,51 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import bernie.tcpclient.Preference.SettingsActivity;
+import bernie.tcpclient.Preference.SettingsFragment;
 
 
 public class TCPSenderActivity extends Activity {
 
     Client client = new Client();
     private static  final int PORT = 80;
+    private String ADDR = "";
+    private String CODE = "";
+    private final String QRSPLITTER = ":";
+    private final String BARCODEAPPNAME = "com.google.zxing.client.android";
+    private boolean scanSuccess = true;
+    AlertDialog noConnDialog;
+    AlertDialog noScanDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        AlertDialog.Builder builder = new AlertDialog.Builder(TCPSenderActivity.this);
+        builder.setMessage(R.string.noConnDialogText)
+                .setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                })
+                .setTitle(R.string.noConnDialogTitle);
+        noConnDialog = builder.create();
+        builder.setMessage(R.string.noScanDialogText)
+                .setPositiveButton(R.string.download, new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        try {
+                            startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=" + BARCODEAPPNAME)));
+                        } catch (android.content.ActivityNotFoundException anfe2) {
+                            startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://play.google.com/store/apps/details?id=" + BARCODEAPPNAME)));
+                        }
+                    }
+                })
+                .setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                })
+                .setTitle(R.string.noScanDialogTitle);
+        noScanDialog = builder.create();
+
         setContentView(R.layout.activity_tcpsender);
     }
 
@@ -76,13 +116,51 @@ public class TCPSenderActivity extends Activity {
                 msg = ""+10;
                 break;
         }
-        String addr = ((TextView)findViewById(R.id.addrInput)).getText().toString();
+        String addr = ADDR;
         if(addr.length() >=11)
-            client.safeSend(addr,PORT,msg);
+            client.safeSend(addr,PORT,CODE+QRSPLITTER+msg);
+    }
+
+    public void connect(View v){
+        Button b = (Button) v;
+        b.setText("...connecting");
+        b.setEnabled(false);
+        try {
+            scanSuccess = false;
+            Intent intent = new Intent("com.google.zxing.client.android.SCAN");
+            intent.setPackage("com.google.zxing.client.android");
+            intent.putExtra("SCAN_MODE", "QR_CODE_MODE");
+            startActivityForResult(intent, 0);
+            scanSuccess = true;
+        }
+        catch(ActivityNotFoundException anfe){
+            noScanDialog.show();
+        }
+    }
+
+    public void onActivityResult(int requestCode, int resultCode, Intent intent) {
+        if (requestCode == 0) {
+            if (resultCode == RESULT_OK) {
+                String[] contents = intent.getStringExtra("SCAN_RESULT").split(QRSPLITTER);
+                CODE = contents[0];
+                ADDR = contents[1];
+                Button b = (Button)findViewById(R.id.btnConnect);
+                b.setText("Reconnect");
+                if(ADDR.startsWith("No")){
+                    noConnDialog.show();
+                    b.setText("Connect");
+                }
+                b.setEnabled(true);
+            } else if (resultCode == RESULT_CANCELED) {
+                Button b = (Button)findViewById(R.id.btnConnect);
+                b.setText("Connect");
+                b.setEnabled(true);
+            }
+        }
     }
 
     public void init(View view){
-        String addr = ((TextView)findViewById(R.id.addrInput)).getText().toString();
+        String addr = ADDR;
         client = new Client();
         int ret = client.init(addr,PORT);
     }
@@ -122,6 +200,8 @@ public class TCPSenderActivity extends Activity {
         b[7] = (Button)(findViewById(R.id.button8));
         b[8] = (Button)(findViewById(R.id.button9));
         b[9] = (Button)(findViewById(R.id.button10));
+
+
 
         for(int i = 0; i<10; i++){
             b[i].setText(btnlbls[i]);
