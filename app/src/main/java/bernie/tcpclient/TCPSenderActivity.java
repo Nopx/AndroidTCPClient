@@ -24,7 +24,7 @@ import bernie.tcpclient.Preference.SettingsFragment;
 public class TCPSenderActivity extends Activity {
 
     Client client = new Client();
-    private static  final int PORT = 80;
+    private static  final int PORT = 4322;
     private String ADDR = "";
     private String CODE = "";
     private final String QRSPLITTER = ":";
