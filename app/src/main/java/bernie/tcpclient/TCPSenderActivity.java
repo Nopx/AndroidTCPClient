@@ -23,15 +23,14 @@ import bernie.tcpclient.Preference.SettingsFragment;
 
 public class TCPSenderActivity extends Activity {
 
-    Client client = new Client();
     private static  final int PORT = 4322;
     private String ADDR = "";
-    private String CODE = "";
     private final String QRSPLITTER = ":";
     private final String BARCODEAPPNAME = "com.google.zxing.client.android";
     private boolean scanSuccess = true;
     AlertDialog noConnDialog;
     AlertDialog noScanDialog;
+    Client client = new Client("StudStudStudStud","StudStudStudStud",QRSPLITTER);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -118,7 +117,7 @@ public class TCPSenderActivity extends Activity {
         }
         String addr = ADDR;
         if(addr.length() >=11)
-            client.safeSend(addr,PORT,CODE+QRSPLITTER+msg);
+            client.safeSend(addr,PORT,/*CODE+QRSPLITTER+*/msg);
     }
 
     public void connect(View v){
@@ -142,10 +141,12 @@ public class TCPSenderActivity extends Activity {
         if (requestCode == 0) {
             if (resultCode == RESULT_OK) {
                 String[] contents = intent.getStringExtra("SCAN_RESULT").split(QRSPLITTER);
-                CODE = contents[0];
-                ADDR = contents[1];
+                String ivp = contents[0];
+                String key = contents[1];
+                ADDR = contents[2];
+                client = new Client(key,ivp,QRSPLITTER);
                 Button b = (Button)findViewById(R.id.btnConnect);
-                b.setText("Reconnect");
+                b.setText("Connected");
                 if(ADDR.startsWith("No")){
                     noConnDialog.show();
                     b.setText("Connect");
@@ -158,12 +159,12 @@ public class TCPSenderActivity extends Activity {
             }
         }
     }
-
+/*OBSOLETE
     public void init(View view){
         String addr = ADDR;
         client = new Client();
         int ret = client.init(addr,PORT);
-    }
+    }*/
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
